@@ -1,0 +1,6 @@
+/.idea
+/cmake-build-debug
+/CMakeLists.txt
+/demo.c
+/log
+/WITRN_hid.h
