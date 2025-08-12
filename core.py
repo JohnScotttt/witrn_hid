@@ -10,6 +10,9 @@ K2_TARGET_PID = 0x5060
 
 
 class WITRN_HID:
+    __API__ = ["Nowtime", "Ah", "Wh", "Rectime", "Runtime", 
+               "DP", "DM", "Temperature", "VBus", "Current", "Group"]
+    
     _fmt = struct.Struct(
         "<xxxxxxxxxxxxxxffIIffxxxxfffBxxxxxxxxx"
     #   "<xxBBxxxxxxxxxxffIIffxxxxfffBxxxxxxxxx"
@@ -89,8 +92,8 @@ if __name__ == "__main__":
     # Return a tuple of time and unpacked data
     # Member variables within the class will also be updated synchronously
     print(k2.now())
-    print(k2.Nowtime, k2.Ah, k2.Wh, k2.Rectime, k2.Runtime, k2.DP,
-          k2.DM, k2.Temperature, k2.VBus, k2.Current, k2.Group)
+    print(k2.Nowtime, k2.Ah, k2.Wh, k2.Rectime, k2.Runtime,
+          k2.DP, k2.DM, k2.Temperature, k2.VBus, k2.Current, k2.Group)
 
     # Only read the data stream
     # Can accept a parameter of type 'hid.device'
@@ -106,8 +109,8 @@ if __name__ == "__main__":
     # If no data is specified, it will unpack the last read data from the instance
     # Update the member variables with the unpacked data
     k2.unpack()
-    print(k2.Nowtime, k2.Ah, k2.Wh, k2.Rectime, k2.Runtime, k2.DP,
-          k2.DM, k2.Temperature, k2.VBus, k2.Current, k2.Group)
+    print(k2.Nowtime, k2.Ah, k2.Wh, k2.Rectime, k2.Runtime,
+          k2.DP, k2.DM, k2.Temperature, k2.VBus, k2.Current, k2.Group)
     print(k2.unpack(k2.data))  # The second 'k2.data' means a different data source
 
     # Close the device
