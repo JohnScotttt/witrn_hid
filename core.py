@@ -18,7 +18,7 @@ class WITRN_HID:
     def __init__(self, vid=K2_TARGET_VID, pid=K2_TARGET_PID):
         # self.sec = None
         # self.ms = None
-        self.nowtime = None
+        self.Nowtime = None
         self.Ah = None
         self.Wh = None
         self.Rectime = None
@@ -39,13 +39,13 @@ class WITRN_HID:
             data = dev.read(64)
             t = time.localtime()
             ms = int(time.time() * 1000) % 1000
-            self.nowtime = time.strftime("%H:%M:%S", t) + f".{ms:03d}"
+            self.Nowtime = time.strftime("%H:%M:%S", t) + f".{ms:03d}"
             return data
         else:
             self.data = self.dev.read(64)
             t = time.localtime()
             ms = int(time.time() * 1000) % 1000
-            self.nowtime = time.strftime("%H:%M:%S", t) + f".{ms:03d}"
+            self.Nowtime = time.strftime("%H:%M:%S", t) + f".{ms:03d}"
             return self.data
 
     def unpack(self, data: list=None) -> tuple:
@@ -70,7 +70,7 @@ class WITRN_HID:
             self.Current,
             self.Group
         ) = package
-        return (self.nowtime, ) + package
+        return (self.Nowtime,) + package
 
     def now(self) -> tuple:
         self.read_data()
@@ -105,7 +105,7 @@ if __name__ == "__main__":
     # If no data is specified, it will unpack the last read data from the instance
     # Update the member variables with the unpacked data
     k2.unpack()
-    print(k2.nowtime, k2.Ah, k2.Wh, k2.Rectime, k2.Runtime, k2.DP,
+    print(k2.Nowtime, k2.Ah, k2.Wh, k2.Rectime, k2.Runtime, k2.DP,
           k2.DM, k2.Temperature, k2.VBus, k2.Current, k2.Group)
     print(k2.unpack(k2.data))  # The second 'k2.data' means a different data source
 
