@@ -36,10 +36,10 @@ class WITRN_HID:
 
     def read_data(self, dev: hid.device=None) -> list:
         if dev is not None:
-            self.data = dev.read(64)
+            return dev.read(64)
         else:
             self.data = self.dev.read(64)
-        return self.data
+            return self.data
 
     def unpack(self, data: list=None) -> tuple:
         if data is None:
@@ -77,11 +77,33 @@ class WITRN_HID:
 
 
 if __name__ == "__main__":
-    device = WITRN_HID()
-    try:
-        while True:
-            print(device.now())
-    except Exception as e:
-        print(f"Error reading data: {e}")
-    finally:
-        device.close()
+    # Demo
+    # Create an instance of WITRN_HID with the VID and PID
+    k2 = WITRN_HID(K2_TARGET_VID, K2_TARGET_PID)
+
+    # Fast call
+    # Return a tuple of time and unpacked data
+    # Member variables within the class will also be updated synchronously
+    print(k2.now())
+    print(k2.VBus, k2.Current)
+
+    # Only read the data stream
+    # Can accept a parameter of type 'hid.device'
+    # If no device is specified, it will read from the instance device
+    # Return a list of bytes
+    # Update the member variable 'data' when no parameter is provided
+    k2.read_data()
+    print(k2.data)
+    print(k2.read_data(k2.dev)) # The second 'k2.dev' means a different device
+
+    # Only unpack the data
+    # Can accept a parameter of type 'list'
+    # If no data is specified, it will unpack the last read data from the instance
+    # Update the member variables with the unpacked data
+    k2.unpack()
+    print(k2.Ah, k2.Wh, k2.Rectime, k2.Runtime, k2.DP, 
+          k2.DM, k2.Temperature, k2.VBus, k2.Current, k2.Group)
+    print(k2.unpack(k2.data))  # The second 'k2.data' means a different data source
+
+    # Close the device
+    k2.close()
