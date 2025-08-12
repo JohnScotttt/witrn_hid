@@ -89,7 +89,8 @@ if __name__ == "__main__":
     # Return a tuple of time and unpacked data
     # Member variables within the class will also be updated synchronously
     print(k2.now())
-    print(k2.VBus, k2.Current)
+    print(k2.Nowtime, k2.Ah, k2.Wh, k2.Rectime, k2.Runtime, k2.DP,
+          k2.DM, k2.Temperature, k2.VBus, k2.Current, k2.Group)
 
     # Only read the data stream
     # Can accept a parameter of type 'hid.device'
