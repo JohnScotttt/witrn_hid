@@ -20,9 +20,11 @@ def old_to_new(old_csv_path, new_csv_path):
             elif i == 4:
                 new_line = b"Time(D.hh:mm:ss.ms),Voltage(V),Current(A),Power(W),Temp(\xc2\xb0C),\r\n"
             else:
-                l = line.strip().split(b", ")
+                l = [x.strip() for x in line.strip().split(b",")]
+                if l[4] == b"--":
+                    l[4] = b"0.0"
                 l[0] = b"=" + l[0][:9] + b"." + l[0][10:]
-                new_line = b",".join(l) + b"\r\n"
+                new_line = b",".join(l) + b",\r\n"
             new.write(new_line)
     except Exception as e:
         print(f"Error opening files: {e}")
