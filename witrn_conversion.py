@@ -1,5 +1,6 @@
 # WITRN conversion UI
 # Created by JohnScotttt on 2025/8/16, modified on 2025/8/18
+# Copyright (c) 2025 JohnScotttt
 # Version 1.1
 
 def old_to_new(old_csv_path, new_csv_path):
